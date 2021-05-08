@@ -28,6 +28,12 @@ class DatabaseManager(object):
         print(name + "さん")
         print("登録しました")
         self.conn.commit()
+    
+    def create(self):
+        self.cur.execute('create table event(idm blob, name text, mode integer, accepted_at text, created_at text)')
+        self.cur.execute('create table record(idm blob, name text, mode text, accepted_at text)')
+        self.cur.execute('create table student(idm blob, name text, created_at text)')
+        self.conn.commit()   
 
     def update(self, idm):
         data = self.cur.execute('select * from event where idm=?', (idm,))
